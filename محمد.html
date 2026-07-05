@@ -1,0 +1,1561 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محمد السعيد | لاعب كرة قدم</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Noto+Kufi+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --neon-green: #00ff88;
+            --neon-green-dim: #00cc6a;
+            --neon-green-glow: rgba(0, 255, 136, 0.15);
+            --neon-green-border: rgba(0, 255, 136, 0.25);
+            --neon-green-strong-glow: rgba(0, 255, 136, 0.4);
+            --accent-gold: #ffd700;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #484f58;
+            --glass-bg: rgba(22, 27, 34, 0.6);
+            --glass-bg-strong: rgba(22, 27, 34, 0.8);
+            --glass-border: rgba(0, 255, 136, 0.12);
+            --glass-border-hover: rgba(0, 255, 136, 0.35);
+            --font-primary: 'Cairo', 'Noto Kufi Arabic', sans-serif;
+            --font-display: 'Noto Kufi Arabic', 'Cairo', sans-serif;
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            direction: rtl;
+        }
+
+        /* ===== ANIMATED BACKGROUND ===== */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .bg-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(0, 255, 136, 0.06);
+            top: -200px;
+            right: -100px;
+            animation: floatGlow 12s ease-in-out infinite;
+        }
+
+        .bg-glow-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(0, 255, 136, 0.04);
+            bottom: -150px;
+            left: -100px;
+            animation: floatGlow 15s ease-in-out infinite reverse;
+        }
+
+        .bg-glow-3 {
+            width: 350px;
+            height: 350px;
+            background: rgba(0, 204, 106, 0.05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.95); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat linear infinite;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-10vh) scale(1);
+            }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: var(--transition-smooth);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 17, 23, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0.7rem 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--neon-green), var(--neon-green-dim));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--bg-primary);
+            box-shadow: 0 0 20px var(--neon-green-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-logo-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo-text span {
+            color: var(--neon-green);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--neon-green);
+            background: var(--neon-green-glow);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 20px;
+            height: 2px;
+            background: var(--neon-green);
+            border-radius: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+            border: none;
+            background: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== MAIN CONTENT WRAPPER ===== */
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-inner {
+            max-width: 1280px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: var(--neon-green-glow);
+            border: 1px solid var(--neon-green-border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--neon-green);
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-badge i {
+            font-size: 0.75rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-name .highlight {
+            background: linear-gradient(135deg, var(--neon-green), #00ffaa, var(--neon-green-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .hero-grade {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-grade .divider-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green-glow);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+        }
+
+        .hero-description strong {
+            color: var(--neon-green);
+            font-weight: 700;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--neon-green);
+            line-height: 1;
+            text-shadow: 0 0 30px var(--neon-green-glow);
+        }
+
+        .hero-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInLeft 1s ease-out 0.3s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 380px;
+            height: 380px;
+        }
+
+        .hero-image-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 1px solid var(--neon-green-border);
+            animation: ringPulse 4s ease-in-out infinite;
+        }
+
+        .hero-image-ring:nth-child(1) {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-image-ring:nth-child(2) {
+            width: 115%;
+            height: 115%;
+            animation-delay: 0.5s;
+            border-color: rgba(0, 255, 136, 0.08);
+        }
+
+        .hero-image-ring:nth-child(3) {
+            width: 130%;
+            height: 130%;
+            animation-delay: 1s;
+            border-color: rgba(0, 255, 136, 0.04);
+        }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.03); opacity: 0.5; }
+        }
+
+        .hero-image-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, var(--neon-green-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(30px);
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--neon-green-border);
+            box-shadow:
+                0 0 40px var(--neon-green-glow),
+                inset 0 0 40px rgba(0, 255, 136, 0.05);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-floating-icon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg-strong);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--neon-green);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: floatIcon 5s ease-in-out infinite;
+        }
+
+        .hero-floating-icon:nth-child(5) {
+            top: 10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .hero-floating-icon:nth-child(6) {
+            bottom: 15%;
+            left: -5%;
+            animation-delay: 1.5s;
+        }
+
+        .hero-floating-icon:nth-child(7) {
+            bottom: -5%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-12px) rotate(3deg); }
+            75% { transform: translateY(8px) rotate(-3deg); }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-green));
+        }
+
+        .section-label::after {
+            background: linear-gradient(90deg, var(--neon-green), transparent);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-title .accent {
+            color: var(--neon-green);
+        }
+
+        .section-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== GLASS CARD BASE ===== */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.3), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--glass-border-hover);
+            transform: translateY(-6px);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 40px var(--neon-green-glow);
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .skill-icon-wrapper {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--neon-green-glow), rgba(0, 255, 136, 0.05));
+            border: 1px solid var(--neon-green-border);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--neon-green);
+            transition: var(--transition-bounce);
+            position: relative;
+        }
+
+        .skill-card:hover .skill-icon-wrapper {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 0 30px var(--neon-green-glow);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.25), rgba(0, 255, 136, 0.08));
+        }
+
+        .skill-name {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .skill-description {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skill Progress Bar */
+        .skill-progress {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-green-dim), var(--neon-green));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 0 10px var(--neon-green-glow);
+            position: relative;
+        }
+
+        .skill-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+            animation: progressShine 2s ease-in-out infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .skill-percent {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--neon-green);
+        }
+
+        /* ===== IDOLS SECTION ===== */
+        .idols-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .idol-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .idol-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .idol-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .idol-card:hover .idol-image-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .idol-image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13, 17, 23, 0.95) 0%, rgba(13, 17, 23, 0.3) 50%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+
+        .idol-number {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(0, 255, 136, 0.1);
+            line-height: 1;
+        }
+
+        .idol-country {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--neon-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .idol-name {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .idol-desc {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .idol-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .idol-trait {
+            padding: 0.3rem 0.8rem;
+            background: var(--neon-green-glow);
+            border: 1px solid var(--neon-green-border);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--neon-green);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-logo span {
+            color: var(--neon-green);
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-text .heart {
+            color: var(--neon-green);
+            animation: pulse 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== CURSOR GLOW (Desktop) ===== */
+        .cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            display: none;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                order: 2;
+            }
+
+            .hero-visual {
+                order: 1;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image-wrapper {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-image-container {
+                width: 240px;
+                height: 240px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 280px;
+                height: 100vh;
+                background: rgba(13, 17, 23, 0.95);
+                backdrop-filter: blur(30px);
+                -webkit-backdrop-filter: blur(30px);
+                flex-direction: column;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 2rem;
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                border-left: 1px solid var(--glass-border);
+                z-index: 999;
+            }
+
+            .nav-links.open {
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                font-size: 1.1rem;
+                padding: 0.8rem 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .hero-image-wrapper {
+                width: 250px;
+                height: 250px;
+            }
+
+            .hero-image-container {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-floating-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                border-radius: 10px;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .hero-stat-value {
+                font-size: 1.6rem;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .skill-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .idols-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .idol-image-wrapper {
+                height: 260px;
+            }
+
+            .cursor-glow {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+
+            .hero-image-container {
+                width: 180px;
+                height: 180px;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .idol-image-wrapper {
+                height: 220px;
+            }
+        }
+
+        /* ===== MOBILE NAV OVERLAY ===== */
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* ===== SELECTION ===== */
+        ::selection {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--neon-green);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <div class="particles-container" id="particles"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <div class="nav-logo-text">محمد <span>السعيد</span></div>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="active">الرئيسية</a></li>
+                <li><a href="#skills">المهارات</a></li>
+                <li><a href="#idols">قدواتي</a></li>
+            </ul>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- ===== HERO SECTION ===== -->
+        <section class="hero" id="hero">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fas fa-circle"></i>
+                        لاعب كرة قدم واعد
+                    </div>
+
+                    <h1 class="hero-name">
+                        محمد <span class="highlight">السعيد</span>
+                    </h1>
+
+                    <div class="hero-grade">
+                        <span>الصف الثالث الإعدادي</span>
+                        <span class="divider-dot"></span>
+                        <span>طالب رياضي</span>
+                    </div>
+
+                    <p class="hero-description">
+                        كرة القدم ليست مجرد لعبة بالنسبة لي — إنها <strong>شغف يحرك كل خلية في جسدي</strong>. من أول لمسة كرة في الشارع وحتى أصعد ملعبًا رسميًا، وأنا أعيش حلمي وأسعى لأن أصبح اسمًا يُذكر في عالم كرة القدم.
+                    </p>
+
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-count="5">0</div>
+                            <div class="hero-stat-label">سنوات خبرة</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-count="47">0</div>
+                            <div class="hero-stat-label">هدف مسجل</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-count="12">0</div>
+                            <div class="hero-stat-label">بطولة</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <div class="hero-image-ring"></div>
+                        <div class="hero-image-ring"></div>
+                        <div class="hero-image-ring"></div>
+                        <div class="hero-image-glow"></div>
+                        <div class="hero-image-container">
+                            <img src="https://picsum.photos/seed/mohamed-football-player/600/600.jpg" alt="محمد السعيد - لاعب كرة قدم" loading="eager">
+                        </div>
+                        <div class="hero-floating-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="hero-floating-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="hero-floating-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SKILLS SECTION ===== -->
+        <section class="section" id="skills">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">قدراتي في الملعب</div>
+                    <h2 class="section-title">مهارات <span class="accent">كرة القدم</span></h2>
+                    <p class="section-subtitle">أمتلك مجموعة متكاملة من المهارات التي أطورها يوميًا بالتدريب المستمر والالتزام</p>
+                </div>
+
+                <div class="skills-grid">
+                    <!-- Skill 1: المراوغة -->
+                    <div class="glass-card skill-card reveal reveal-delay-1">
+                        <div class="skill-icon-wrapper">
+                            <i class="fas fa-person-running"></i>
+                        </div>
+                        <h3 class="skill-name">المراوغة</h3>
+                        <p class="skill-description">قدرة استثنائية على تخطي المدافعين بحركات سريعة ومتغيرة الاتجاه بأسلوب عفوي وإبداعي</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="92"></div>
+                        </div>
+                        <span class="skill-percent">92%</span>
+                    </div>
+
+                    <!-- Skill 2: التسديد -->
+                    <div class="glass-card skill-card reveal reveal-delay-2">
+                        <div class="skill-icon-wrapper">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3 class="skill-name">التسديد</h3>
+                        <p class="skill-description">تسديدات قوية ودقيقة من مختلف المسافات والزوايا، بقدمين قويتين ومتوازنتين</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="88"></div>
+                        </div>
+                        <span class="skill-percent">88%</span>
+                    </div>
+
+                    <!-- Skill 3: السرعة -->
+                    <div class="glass-card skill-card reveal reveal-delay-3">
+                        <div class="skill-icon-wrapper">
+                            <i class="fas fa-gauge-high"></i>
+                        </div>
+                        <h3 class="skill-name">السرعة</h3>
+                        <p class="skill-description">انطلاقة سريعة في أول عشرين مترًا مع قدرة على الحفاظ على السرعة العالية طوال المباراة</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="95"></div>
+                        </div>
+                        <span class="skill-percent">95%</span>
+                    </div>
+
+                    <!-- Skill 4: الرؤية -->
+                    <div class="glass-card skill-card reveal reveal-delay-4">
+                        <div class="skill-icon-wrapper">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="skill-name">الرؤية التكتيكية</h3>
+                        <p class="skill-description">قدرة على قراءة الملعب واستباق اللعب وتوزيع التمريرات الذكية في الزمان والمكان المناسبين</p>
+                        <div class="skill-progress">
+                            <div class="skill-progress-bar" data-width="85"></div>
+                        </div>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== IDOLS SECTION ===== -->
+        <section class="section" id="idols">
+            <div class="section-inner">
+                <div class="section-header reveal">
+                    <div class="section-label">مصدر الإلهام</div>
+                    <h2 class="section-title">قدواتي في <span class="accent">كرة القدم</span></h2>
+                    <p class="section-subtitle">لاعبون أسطوريون أستلهم منهم الروح القتالية والعمل الجاد والطموح اللامحدود</p>
+                </div>
+
+                <div class="idols-grid">
+                    <!-- Mohamed Salah -->
+                    <div class="glass-card idol-card reveal reveal-delay-1">
+                        <div class="idol-image-wrapper">
+                            <img src="https://picsum.photos/seed/mohamed-salah-player/700/500.jpg" alt="محمد صلاح" loading="lazy">
+                            <div class="idol-image-overlay">
+                                <span class="idol-number">01</span>
+                                <div class="idol-country">
+                                    <i class="fas fa-flag"></i>
+                                    مصر 🇪🇬
+                                </div>
+                                <h3 class="idol-name">محمد صلاح</h3>
+                                <p class="idol-desc">
+                                    أسطورة مصرية حقيقية أثبتت أن الحلم لا يعرف حدودًا. صلاح علّمني أن الابتسامة في وجه التحديات هي أقوى سلاح، وأن العمل الصامت يصنع أعظم الإنجازات.
+                                </p>
+                                <div class="idol-traits">
+                                    <span class="idol-trait">سرعة فائقة</span>
+                                    <span class="idol-trait">تسديد مزدوج</span>
+                                    <span class="idol-trait">تواضع</span>
+                                    <span class="idol-trait">قائد ملهم</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cristiano Ronaldo -->
+                    <div class="glass-card idol-card reveal reveal-delay-2">
+                        <div class="idol-image-wrapper">
+                            <img src="https://picsum.photos/seed/cristiano-ronaldo-cr7/700/500.jpg" alt="كريستيانو رونالدو" loading="lazy">
+                            <div class="idol-image-overlay">
+                                <span class="idol-number">02</span>
+                                <div class="idol-country">
+                                    <i class="fas fa-flag"></i>
+                                    البرتغال 🇵🇹
+                                </div>
+                                <h3 class="idol-name">كريستيانو رونالدو</h3>
+                                <p class="idol-desc">
+                                    تجسيد حي لمعنى الانضباط والإرادة الفولاذية. رونالدو يثبت يوميًا أن الموهبة وحدها لا تكفي، وأن التدريب المستمر والجهد غير العادي هما ما يصنعان الخالدين.
+                                </p>
+                                <div class="idol-traits">
+                                    <span class="idol-trait">جسدية خارقة</span>
+                                    <span class="idol-trait">قفزة عالية</span>
+                                    <span class="idol-trait">عقلية فولاذية</span>
+                                    <span class="idol-trait">جوع للهداف</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">محمد <span>السعيد</span></div>
+            <p class="footer-text">
+                صُنع بشغف <span class="heart">♥</span> — كل خطوة على الملعب تقربني من حلمي
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        /* ===== Particles Generator ===== */
+        (function createParticles() {
+            const container = document.getElementById('particles');
+            const count = 20;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDuration = (8 + Math.random() * 12) + 's';
+                p.style.animationDelay = (Math.random() * 10) + 's';
+                p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+                container.appendChild(p);
+            }
+        })();
+
+        /* ===== Navbar Scroll Effect ===== */
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', function () {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            lastScroll = currentScroll;
+        }, { passive: true });
+
+        /* ===== Mobile Menu ===== */
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                if (navLinks.classList.contains('open')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        /* ===== Active Nav Link on Scroll ===== */
+        const sections = document.querySelectorAll('section[id]');
+        const navLinkElements = navLinks.querySelectorAll('a');
+
+        function updateActiveLink() {
+            const scrollY = window.pageYOffset + 200;
+            sections.forEach(function (section) {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                if (scrollY >= top && scrollY < top + height) {
+                    navLinkElements.forEach(function (a) {
+                        a.classList.remove('active');
+                        if (a.getAttribute('href') === '#' + id) {
+                            a.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+        /* ===== Scroll Reveal (Intersection Observer) ===== */
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(function (el) {
+            revealObserver.observe(el);
+        });
+
+        /* ===== Skill Progress Bars Animation ===== */
+        const progressBars = document.querySelectorAll('.skill-progress-bar');
+
+        const progressObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.getAttribute('data-width');
+                    setTimeout(function () {
+                        bar.style.width = width + '%';
+                    }, 300);
+                    progressObserver.unobserve(bar);
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+
+        progressBars.forEach(function (bar) {
+            progressObserver.observe(bar);
+        });
+
+        /* ===== Counter Animation ===== */
+        const statValues = document.querySelectorAll('.hero-stat-value[data-count]');
+
+        function animateCounter(el) {
+            const target = parseInt(el.getAttribute('data-count'), 10);
+            const duration = 2000;
+            const start = performance.now();
+
+            function update(now) {
+                const elapsed = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.floor(eased * target);
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.textContent = target;
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        const counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statValues.forEach(function (el) {
+            counterObserver.observe(el);
+        });
+
+        /* ===== Cursor Glow Effect (Desktop only) ===== */
+        const cursorGlow = document.getElementById('cursorGlow');
+
+        if (window.matchMedia('(pointer: fine)').matches) {
+            cursorGlow.style.display = 'block';
+
+            document.addEventListener('mousemove', function (e) {
+                cursorGlow.style.left = e.clientX + 'px';
+                cursorGlow.style.top = e.clientY + 'px';
+            }, { passive: true });
+
+            // Hide glow when cursor leaves window
+            document.addEventListener('mouseleave', function () {
+                cursorGlow.style.opacity = '0';
+            }, { passive: true });
+
+            document.addEventListener('mouseenter', function () {
+                cursorGlow.style.opacity = '1';
+            }, { passive: true });
+        }
+
+        /* ===== Smooth Scroll for Anchor Links ===== */
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const target = document.querySelector(targetId);
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
